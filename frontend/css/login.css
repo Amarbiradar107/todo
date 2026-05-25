@@ -1,0 +1,51 @@
+#login-page{
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    height: 100vh;
+    margin: 40px 40px;
+    border: #2b01fa double 1px;
+    
+    /* background-color: #ffffff; */
+}
+
+
+#login-title {
+    font-size: 35px;
+    font-weight: bold;
+    margin: 20px 20px;
+    text-align: center;
+}
+
+#rightside {
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-top: 50px;
+    margin-right:100px;
+    margin-left: 900px;
+    border: #2b01fa double 1px;
+}
+
+#loginform{
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    margin: 50px 50px ;
+    
+    border-radius: 10px;
+    border: #2b01fa double 1px;
+}
+
+#username,#password,#submitbtn{
+    margin: 10px ;
+    /* padding: 10px; */
+    
+}
+
+#welcome{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 20px;
+}
