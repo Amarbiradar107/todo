@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tasks - TaskFlow</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="brand">📋 TaskFlow</div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html">🏠 Dashboard</a></li>
+                <li class="nav-item active"><a href="tasks.html">✅ Tasks</a></li>
+                <li class="nav-item"><a href="#">📅 Calendar</a></li>
+                <li class="nav-item"><a href="#">📁 Categories</a></li>
+                <li class="nav-item"><a href="profile.html">⚙️ Settings</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="header-actions">
+                <div>
+                    <h1>All Tasks</h1>
+                    <p style="color: var(--text-muted);">Manage and track all your scheduled items.</p>
+                </div>
+                <a href="create-task.html" class="btn btn-primary" style="width: auto;">+ Create Task</a>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Task Title</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Project meeting</strong></td>
+                            <td><span class="badge badge-work">Work</span></td>
+                            <td><span class="badge badge-high">High</span></td>
+                            <td>May 20, 2026 10:00 AM</td>
+                            <td><span style="color: var(--warning); font-weight: 600;">Pending</span></td>
+                            <td>
+                                <a href="edit-task.html" style="text-decoration: none; margin-right: 12px;">✏️</a>
+                                <a href="#" style="text-decoration: none;">🗑️</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Design homepage</strong></td>
+                            <td><span class="badge badge-work">Work</span></td>
+                            <td><span class="badge badge-medium">Medium</span></td>
+                            <td>May 20, 2026 01:00 PM</td>
+                            <td><span style="color: var(--primary); font-weight: 600;">In Progress</span></td>
+                            <td>
+                                <a href="edit-task.html" style="text-decoration: none; margin-right: 12px;">✏️</a>
+                                <a href="#" style="text-decoration: none;">🗑️</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Buy groceries</strong></td>
+                            <td><span class="badge badge-personal">Personal</span></td>
+                            <td><span class="badge badge-low">Low</span></td>
+                            <td>May 20, 2026 06:00 PM</td>
+                            <td><span style="color: var(--success); font-weight: 600;">Completed</span></td>
+                            <td>
+                                <a href="edit-task.html" style="text-decoration: none; margin-right: 12px;">✏️</a>
+                                <a href="#" style="text-decoration: none;">🗑️</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

@@ -3,10 +3,11 @@
     /* justify-content: center; */
     /* align-items: center; */
     height: 100vh;
-    margin: 40px 40px;
-    border: #2b01fa double 1px;
+    margin: 0px 40px;
+    /* border: #2b01fa double 1px; */
+    background-color: #66daef;
+    border-radius: 30px;
     
-    /* background-color: #ffffff; */
 }
 
 
@@ -19,33 +20,52 @@
 
 #rightside {
 
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* grid-template-rows: auto;
+    grid-column-end: auto; */
     align-items: end;
     margin-top: 50px;
     margin-right:100px;
     margin-left: 900px;
-    border: #2b01fa double 1px;
+    background-color: #ffffff;
+    /* border: #2b01fa double 1px; */
+    border-radius: 10px;
+    /* opacity: 2; */
 }
 
 #loginform{
     display: grid;
     grid-template-columns: 1fr;
     align-items: start;
-    margin: 50px 50px ;
+    /* margin: 50px 50px ; */
     
     border-radius: 10px;
-    border: #2b01fa double 1px;
+    /* border: #2b01fa double 1px; */
 }
 
-#username,#password,#submitbtn{
+#username,#password{
     margin: 10px ;
     /* padding: 10px; */
-    
+    margin-right: 50px;    
 }
 
 #welcome{
     font-size: 20px;
     font-weight: bold;
+    margin: 20px 20px;
+}
+
+#submitbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 20px;  
+}
+
+#leftside{
+    display: flex;
+    justify-content: left;
+    align-items: center;
     margin: 20px 20px;
 }
