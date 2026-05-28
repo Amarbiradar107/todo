@@ -16,6 +16,23 @@ class Userlist(APIView):
 
 
     def post(self, request):
+
+        user_name = request.data.get('user_name')
+        if user_name=="":
+            return Response({'error': 'user_name cannot be empty'}, status=status.HTTP_400_BAD_REQUEST)
+        user_mail = request.data.get('email')
+        if user_mail=="":
+            return Response({'error': 'email cannot be empty'}, status=status.HTTP_400_BAD_REQUEST)
+        if user_mail == User.objects.filter(email=user_mail).first():
+            return Response({'error': 'email already exists'}, status=status.HTTP_400_BAD_REQUEST)
+        # if User.objects.filter(username=user_name).exists():
+        #     return Response({'message': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
+        password = request.data.get('password')
+        confirm_password = request.data.get('confirm_password')
+        if password != confirm_password:
+            return Response({'error': 'passwords do not match'}, status=status.HTTP_400_BAD_REQUEST)
+
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

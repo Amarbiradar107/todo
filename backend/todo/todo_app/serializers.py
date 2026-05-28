@@ -40,3 +40,5 @@ class CategorySerializer(serializers.ModelSerializer):
             'is_deleted': {'read_only': True},
         }
 
+
+

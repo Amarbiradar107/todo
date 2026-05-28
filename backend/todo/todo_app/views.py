@@ -72,13 +72,17 @@ class TaskDeleteView(APIView):
 
 
 class CategoryListView(APIView):
-    permission_classes = [IsAdminOrReadOnly]
+    # permission_classes = [IsAdminOrReadOnly]
     def get(self,request):
         category_list = Category.objects.filter(is_deleted=False)
         serializer = CategorySerializer(category_list, many=True)
         return Response(serializer.data)
 
     def post(self,request):
+        # Check for duplicate category name
+        category_name = request.data.get('category_name')
+        if Category.objects.filter(category_name=category_name, is_deleted=False).exists():
+            return Response({'detail': 'Category with this name already exists.'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = CategorySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
