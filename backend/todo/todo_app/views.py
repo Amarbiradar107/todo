@@ -2,9 +2,11 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+
 from rest_framework.views import APIView
 from .models import Task, Category
 from .serializers import TaskSerializer, CategorySerializer
+from  .permission import IsAdminOrReadOnly
 
 
 # Create your views here.
@@ -70,6 +72,7 @@ class TaskDeleteView(APIView):
 
 
 class CategoryListView(APIView):
+    permission_classes = [IsAdminOrReadOnly]
     def get(self,request):
         category_list = Category.objects.filter(is_deleted=False)
         serializer = CategorySerializer(category_list, many=True)

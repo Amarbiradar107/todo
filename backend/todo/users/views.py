@@ -8,7 +8,7 @@ from .serializers import UserSerializer
 
 
 class Userlist(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         userdetails = User.objects.all()
         serializer = UserSerializer(userdetails, many=True)
