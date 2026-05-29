@@ -13,20 +13,20 @@ class TaskSerializer(serializers.ModelSerializer):
         }
 
 
-    def create(self, **validated_data):
-        task = Task(**validated_data)
-        task.save()
-        return task
-
-
-    def update(self, instance, **validated_data):
-        instance.title = validated_data.get('title', instance.title)
-        instance.description = validated_data.get('description', instance.description)
-        instance.priority = validated_data.get('priority', instance.priority)
-        instance.status = validated_data.get('status', instance.status)
-        instance.due_date = validated_data.get('due_date', instance.due_date)
-        instance.save()
-        return instance
+    # def create(self, **validated_data):
+    #     task = Task(**validated_data)
+    #     task.save()
+    #     return task
+    #
+    #
+    # def update(self, instance, **validated_data):
+    #     instance.title = validated_data.get('title', instance.title)
+    #     instance.description = validated_data.get('description', instance.description)
+    #     instance.priority = validated_data.get('priority', instance.priority)
+    #     instance.status = validated_data.get('status', instance.status)
+    #     instance.due_date = validated_data.get('due_date', instance.due_date)
+    #     instance.save()
+    #     return instance
 
 
 
