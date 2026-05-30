@@ -31,7 +31,7 @@ class TaskListView(APIView):
 
 
 class TaskDetailView(APIView):
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly,IsAuthenticated]
 
     def get(self,request,pk):
         task = get_object_or_404(Task, pk=pk, is_deleted=False)
@@ -54,8 +54,9 @@ class TaskDetailView(APIView):
     #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class TaskDeleteView(APIView):
 
+class TaskDeleteView(APIView):
+    Permission_classes = [IsAdminOrReadOnly,IsAuthenticated]
     def delete(self, request, pk):
         task = get_object_or_404(Task, pk=pk)
         if task.is_deleted:
@@ -75,11 +76,12 @@ class TaskDeleteView(APIView):
 
 
 class CategoryListView(APIView):
-    # permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly,IsAuthenticated]
     def get(self,request):
         category_list = Category.objects.filter(is_deleted=False)
         serializer = CategorySerializer(category_list, many=True)
         return Response(serializer.data)
+
 
     def post(self,request):
         # Check for duplicate category name
@@ -93,6 +95,7 @@ class CategoryListView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CategoryDetailView(APIView):
+    permission_classes = [IsAdminOrReadOnly,IsAuthenticated]
     def get(self,request,pk):
         category = get_object_or_404(Category, pk=pk,is_deleted=False)
         # if category.is_deleted:
