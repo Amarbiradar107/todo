@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
 from django.contrib.auth.models import User as django_User
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.authtoken.models import Token
 
 from .models import User
@@ -58,7 +59,11 @@ class registration(APIView):
             data['registration'] = 'account created successfully'
             data['user_name'] = account.username
             data['email'] = account.email
-            data['token'] = Token.objects.create(user=account).key
+            # data['token'] = Token.objects.create(user=account).key
+            # return Response(data, status=status.HTTP_201_CREATED)
+            refresh = RefreshToken.for_user(account)
+            data['token'] = {
+                str(refresh.access_token) }
             return Response(data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
