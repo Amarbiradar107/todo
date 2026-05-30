@@ -66,6 +66,16 @@ class registration(APIView):
 
 
 
+class Logout(APIView):
+
+    def post(self,request):
+        print(request.user.auth_token)
+        request.user.auth_token.delete()
+        return Response({'data':"logout successfully"},status=status.HTTP_200_OK)
+
+
+
+
 
 
 
