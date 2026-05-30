@@ -23,4 +23,5 @@ urlpatterns = [
     path('tasks/',include('todo_app.urls')),
     path('api-auth/ ',include('rest_framework.urls')),
     path('api/task/',include('todo_app.urls')),
+
 ]
