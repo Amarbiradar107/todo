@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.throttling import UserRateThrottle
 
 from rest_framework.views import APIView
 from .models import Task, Category
@@ -15,6 +16,8 @@ from  .permission import IsAdminOrReadOnly
 
 class TaskListView(APIView):
     permission_classes = [IsAuthenticated]
+    throttle_classes = [UserRateThrottle]
+
     def get(self,request):
         task_list = Task.objects.filter(is_deleted=False)
         serializer_class = TaskSerializer(task_list, many=True)
@@ -77,6 +80,7 @@ class TaskDeleteView(APIView):
 
 class CategoryListView(APIView):
     permission_classes = [IsAdminOrReadOnly,IsAuthenticated]
+    throttle_classes = [UserRateThrottle]
     def get(self,request):
         category_list = Category.objects.filter(is_deleted=False)
         serializer = CategorySerializer(category_list, many=True)
