@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Task(models.Model):
-    task_id = models.AutoField(primary_key=True, unique=True, auto_created=True, verbose_name="ID")
+    task_id = models.AutoField(primary_key=True, unique=True, verbose_name="ID")
     title = models.CharField(max_length=100)
     description = models.TextField()
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
@@ -22,7 +22,7 @@ class Task(models.Model):
 
 
 class Category(models.Model):
-    category_id = models.AutoField(primary_key=True, unique=True, auto_created=True, verbose_name="ID")
+    category_id = models.AutoField(primary_key=True, unique=True, verbose_name="ID")
     category_name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
