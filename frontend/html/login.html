@@ -1,47 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/login.css">
-    <title>login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow – Login</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    body { min-height: 100vh; display: flex; align-items: stretch;  background: var(--bg); }
 
+    .auth-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* Left Illustration Panel */
+    .auth-panel {
+      background: linear-gradient(145deg, #5B5FEF 0%, #8B5CF6 60%, #3D41C8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='600' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='400' cy='100' r='200' fill='%23ffffff08'/%3E%3Ccircle cx='100' cy='450' r='150' fill='%23ffffff06'/%3E%3Ccircle cx='500' cy='500' r='80' fill='%23ffffff05'/%3E%3C/svg%3E") no-repeat center/cover;
+    }
+
+    .auth-panel-logo {
+      position: absolute;
+      top: 36px; left: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1;
+    }
+    .auth-panel-logo .logo-box {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.2);
+      border-radius: 10px;
+      display: grid; place-items: center;
+      font-size: 18px;
+      backdrop-filter: blur(6px);
+    }
+    .auth-panel-logo span {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .illus-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .illus-card {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 28px 32px;
+      width: 320px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .illus-icon { font-size: 48px; margin-bottom: 12px; }
+    .illus-title { color: #fff; font-family: var(--font-display); font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .illus-desc { color: rgba(255,255,255,.75); font-size: 14px; line-height: 1.6; }
+
+    .illus-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      width: 320px;
+    }
+    .illus-stat {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+    .illus-stat-val { color: #fff; font-family: var(--font-display); font-size: 22px; font-weight: 800; }
+    .illus-stat-label { color: rgba(255,255,255,.65); font-size: 11px; margin-top: 2px; }
+
+    .auth-dots {
+      display: flex;
+      gap: 6px;
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .auth-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.4); }
+    .auth-dots span.active { background: #fff; width: 18px; border-radius: 3px; }
+
+    /* Right Form Panel */
+    .auth-form-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 48px;
+      background: var(--bg-card);
+    }
+
+    .auth-form-box {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .auth-greeting { font-size: 12.5px; font-weight: 600; color: var(--brand); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
+    .auth-title { font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+    .auth-subtitle { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 32px; }
+
+    .form-stack { display: flex; flex-direction: column; gap: 18px; }
+
+    .input-icon-wrap {
+      position: relative;
+    }
+    .input-icon-wrap .form-control { padding-left: 40px; }
+    .input-icon-wrap .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .input-icon-wrap .input-icon-right {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .form-extras {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .social-row { display: flex; gap: 12px; }
+
+    .auth-footer { text-align: center; margin-top: 24px; font-size: 13px; color: var(--text-secondary); }
+    .auth-footer a { color: var(--brand); font-weight: 600; }
+    .auth-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .auth-layout { grid-template-columns: 1fr; }
+      .auth-panel { display: none; }
+    }
+  </style>
 </head>
 <body>
+<div class="auth-layout">
 
-    <div class="login-page" id="login-page" >
-        <div class="title" id="login-title">Login Screen</div>
-        <div id="rightside">
-            <div  id="welcome">
-                <h2 class="text-center">Welcome</h2>
-            </div>
-
-            <div id="loginform">
-                <form action="/login" method="post">
-                    <div id="username">
-                        <label for="username" style="font-size: large;">Username:</label> 
-                        <input class="form-control" type="text" id="username" name="username" placeholder="Username"><br><br>
-                    </div>
-
-                    <div id="password">
-                        <label for="password" style="font-size: large;">Password:</label>
-                        <input class="form-control" type="password" id="password" name="password" placeholder="Password" required><br><br>
-                    </div>
-                    
-                    <div id="submitbtn">
-                        <input class="btn btn-primary" type="submit" value="Login">
-                    </div>
-                </form>
-            </div>
-            
-        </div>
-
-        <div id="leftside">
-            <div class="info" id="info" >
-                <h1 >TaskFlow</h1>
-                <p>Organize your tasks. Simplify your life.</p>
-            </div>
-        </div>
+  <!-- Left Panel -->
+  <div class="auth-panel">
+    <div class="auth-panel-logo">
+      <div class="logo-box">✅</div>
+      <span>TaskFlow</span>
     </div>
+    <div class="illus-wrap">
+      <div class="illus-card anim-fade-up">
+        <div class="illus-icon">📋</div>
+        <div class="illus-title">TaskFlow</div>
+        <div class="illus-desc">Organize your tasks, simplify your life. Stay on top of everything that matters.</div>
+      </div>
+      <div class="illus-stats anim-fade-up anim-delay-2">
+        <div class="illus-stat">
+          <div class="illus-stat-val">24</div>
+          <div class="illus-stat-label">Total Tasks</div>
+        </div>
+        <div class="illus-stat">
+          <div class="illus-stat-val">10</div>
+          <div class="illus-stat-label">Completed</div>
+        </div>
+        <div class="illus-stat">
+          <div class="illus-stat-val">42%</div>
+          <div class="illus-stat-label">Progress</div>
+        </div>
+      </div>
+    </div>
+    <div class="auth-dots">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Right Form -->
+  <div class="auth-form-panel">
+    <div class="auth-form-box anim-fade-up">
+      <div class="auth-greeting">Welcome back 👋</div>
+      <h1 class="auth-title">Login to continue</h1>
+      <p class="auth-subtitle">Enter your credentials to access your workspace.</p>
+      <div class="form-stack">
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <input class="form-control" type="email" placeholder="Enter your email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input class="form-control" type="password" id="pwd" placeholder="Enter your password" />
+            <span class="input-icon-right" onclick="togglePwd('pwd','eyeIcon1')">
+              <svg id="eyeIcon1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-extras">
+          <label class="checkbox-group">
+            <input type="checkbox" checked />
+            Remember me
+          </label>
+          <a href="#" class="text-link">Forgot Password?</a>
+        </div>
+
+        <a href="index.html"><button class="btn btn-primary btn-block" style="padding:13px 20px;font-size:15px;">Login</button></a>
+
+        <div class="divider">or continue with</div>
+
+        <div class="social-row">
+          <button class="social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Google
+          </button>
+          <button class="social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Apple
+          </button>
+        </div>
+      </div>
+
+      <div class="auth-footer">
+        Don't have an account? <a href="register.html">Sign up</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function togglePwd(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+</script>
 </body>
 </html>
