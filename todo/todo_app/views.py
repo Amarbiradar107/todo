@@ -20,6 +20,8 @@ class TaskListView(APIView):
 
     def get(self,request):
         task_list = Task.objects.filter(is_deleted=False)
+        if task_list is None:
+            return Response({'detail': 'Task not found.'}, status=status.HTTP_404_NOT_FOUND)
         serializer_class = TaskSerializer(task_list, many=True)
         return Response(serializer_class.data)
 
