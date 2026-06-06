@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o4mik1j1hmtwl^c5#c5^+5zh#7*s0_5k+0@$-^$)jyrs52z73b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.0.6', '127.0.0.1','justcode.co.in']
+ALLOWED_HOSTS = ['13.201.98.62', '127.0.0.1','justcode.co.in','https://justcode.co.in']
 
 
 # Application definition
@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'users',
     'todo_app',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'drf_spectacular',
+
 ]
 
 MIDDLEWARE = [
@@ -150,5 +152,27 @@ REST_FRAMEWORK = {
         'DEFAULT_THROTTLE_RATES': {
             'anon': '2/day',
             'user': '5/day'
+        },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+# OpenAPI / Swagger config for drf-spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'TODO Project API',
+    'DESCRIPTION': 'OpenAPI schema for the TODO project',
+    'VERSION': '1.0.0',
+    # Optional: expose JWT Bearer in the docs (see next section for auth)
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SECURITY': [{'BearerAuth': []}],
+    'COMPONENTS': {
+        'securitySchemes': {
+            'BearerAuth': {
+                'type': 'http',
+                'scheme': 'bearer',
+                'bearerFormat': 'JWT',
+            }
         }
+    },
 }
