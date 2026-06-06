@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'users',
     'todo_app',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -147,8 +148,31 @@ REST_FRAMEWORK = {
     #         'rest_framework.throttling.AnonRateThrottle',
     #         'rest_framework.throttling.UserRateThrottle'
     #     ],
-        'DEFAULT_THROTTLE_RATES': {
-            'anon': '2/day',
-            'user': '5/day'
-        }
+    #     'DEFAULT_THROTTLE_RATES': {
+    #         'anon': '2/day',
+    #         'user': '5/day'
+    #     }
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+# OpenAPI / Swagger config for drf-spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'TODO Project API',
+    'DESCRIPTION': 'OpenAPI schema for the TODO project',
+    'VERSION': '1.0.0',
+    # Optional: expose JWT Bearer in the docs (see next section for auth)
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SECURITY': [{'BearerAuth': []}],
+    'COMPONENTS': {
+        'securitySchemes': {
+            'BearerAuth': {
+                'type': 'http',
+                'scheme': 'bearer',
+                'bearerFormat': 'JWT',
+            }
+        }
+    },
+}
+
