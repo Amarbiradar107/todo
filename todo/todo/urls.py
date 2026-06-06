@@ -20,17 +20,14 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, Sp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('home.urls')),
     path('users/',include('users.urls')),
     # path('tasks/',include('todo_app.urls')),
     path('api/task/',include('todo_app.urls')),
-    path('api-auth/ ',include('rest_framework.urls')),
-
-    # Schema (OpenAPI)
+    path('api-auth/',include('rest_framework.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-
     # Swagger UI (interactive)
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-
     # Optional ReDoc UI
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
