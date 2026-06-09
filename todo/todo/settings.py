@@ -169,7 +169,7 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.1',
     # Optional: expose JWT Bearer in the docs (see next section for auth)
     'COMPONENT_SPLIT_REQUEST': True,
-    'SERVE_INCLUDE_SCHEMA': False,
+    'SERVE_INCLUDE_SCHEMA': True,
     'SECURITY': [{'BearerAuth': []}],
     'COMPONENTS': {
         'securitySchemes': {
