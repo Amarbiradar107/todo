@@ -163,22 +163,22 @@ REST_FRAMEWORK = {
 }
 
 # OpenAPI / Swagger config for drf-spectacular
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'TODO Project API',
-    'DESCRIPTION': 'OpenAPI schema for the TODO project',
-    'VERSION': '1.0.1',
+#SPECTACULAR_SETTINGS = {
+ #   'TITLE': 'TODO Project API',
+  #  'DESCRIPTION': 'OpenAPI schema for the TODO project',
+   # 'VERSION': '1.0.1',
     # Optional: expose JWT Bearer in the docs (see next section for auth)
-    'COMPONENT_SPLIT_REQUEST': True,
-    'SERVE_INCLUDE_SCHEMA': True,
-    'SECURITY': [{'BearerAuth': []}],
-    'COMPONENTS': {
-        'securitySchemes': {
-            'BearerAuth': {
-                'type': 'http',
-                'scheme': 'bearer',
-                'bearerFormat': 'JWT',
-            }
-        }
-    },
-}
+#    'COMPONENT_SPLIT_REQUEST': True,
+#    'SERVE_INCLUDE_SCHEMA': True,
+#    'SECURITY': [{'BearerAuth': []}],
+#    'COMPONENTS': {
+#        'securitySchemes': {
+#            'BearerAuth': {
+#                'type': 'http',
+#                'scheme': 'bearer',
+#                'bearerFormat': 'JWT',
+#            }
+#        }
+#    },
+#}
 
