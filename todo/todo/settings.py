@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+from django.conf.global_settings import STATIC_ROOT
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -56,6 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'todo.urls'
+
 
 TEMPLATES = [
     {
@@ -120,7 +123,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 REST_FRAMEWORK = {
 
@@ -161,7 +166,7 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     'TITLE': 'TODO Project API',
     'DESCRIPTION': 'OpenAPI schema for the TODO project',
-    'VERSION': '1.0.0',
+    'VERSION': '1.0.1',
     # Optional: expose JWT Bearer in the docs (see next section for auth)
     'COMPONENT_SPLIT_REQUEST': True,
     'SERVE_INCLUDE_SCHEMA': False,
