@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('users/',include('users.urls')),
+    path('api/example/',include('example.urls')),
     # path('tasks/',include('todo_app.urls')),
     path('api/task/',include('todo_app.urls')),
     path('api-auth/',include('rest_framework.urls')),
