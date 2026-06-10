@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 from django.conf.global_settings import STATIC_ROOT
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'drf_spectacular',
-    'example'
+    'example',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -182,4 +183,18 @@ REST_FRAMEWORK = {
 #        }
 #    },
 #}
+
+AWS_ACCESS_KEY_ID = 'AKIA3VNBVUNRPCO267UI'
+AWS_SECRET_ACCESS_KEY = 'd/Ba+FFeVQEUxXv3OSP9vA/+uX2n+hreobTq81Yw'
+AWS_STORAGE_BUCKET_NAME = 'djangotodoproject'
+STORAGES ={
+    "staticfiles":
+        {
+            "BACKEND": "storages.backends.s3.S3Storage",
+        }
+}
+
+AWS_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_S3_FILE_OVERWRITE = True
 
