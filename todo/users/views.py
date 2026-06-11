@@ -62,8 +62,7 @@ class registration(APIView):
             # data['token'] = Token.objects.create(user=account).key
             # return Response(data, status=status.HTTP_201_CREATED)
             refresh = RefreshToken.for_user(account)
-            data['token'] = {
-                str(refresh.access_token) }
+            data['token'] =  str(refresh.access_token)
             return Response(data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
