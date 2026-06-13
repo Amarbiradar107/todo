@@ -1,4 +1,4 @@
-FROM python:3.15.0b2-bookworm
+FROM --platform=linux/amd64 python:3.15.0b2-bookworm
 LABEL authors="amar biradar"
 
 ENV PYTHONUNBUFFERED=1
