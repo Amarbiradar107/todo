@@ -3,23 +3,14 @@ pipeline {
 
     stages {
 
-        stage('Pull Latest Code') {
-            steps {
-                echo 'Checking out code...'
-                checkout scm
-            }
-        }
-
-        stage('Build Containers') {
-            steps {
-                sh 'docker-compose build'
-            }
-        }
-
         stage('Deploy') {
             steps {
-                sh 'docker-compose down'
-                sh 'docker-compose up -d'
+                    sh '''
+                    cd /home/ubuntu/todoproject
+                    git pull origin main
+                    docker compose down
+                    docker compose up -d --build
+                    '''
             }
         }
     }
