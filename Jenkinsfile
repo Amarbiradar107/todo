@@ -6,6 +6,7 @@ pipeline {
         stage('Deploy') {
             steps {
                     sh '''
+                    pwd
                     cd /home/ubuntu/todoproject
                     git pull origin main
                     docker compose down
