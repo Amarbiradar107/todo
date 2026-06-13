@@ -5,8 +5,8 @@ pipeline {
 
         stage('Pull Latest Code') {
             steps {
-                git branch: 'main',
-                url: 'https://github.com/Amarbiradar107/todo.git'
+                echo 'Checking out code...'
+                checkout scm
             }
         }
 
