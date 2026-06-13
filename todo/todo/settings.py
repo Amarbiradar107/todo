@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 
-from django.conf.global_settings import STATIC_ROOT
+from django.conf.global_settings import STATIC_ROOT, SECURE_SSL_HOST, SECURE_PROXY_SSL_HEADER
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-o4mik1j1hmtwl^c5#c5^+5zh#7*s0_5k+0@$-^$)jyrs52z73b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['13.201.22.144', '127.0.0.1','justcode.co.in','https://justcode.co.in']
+ALLOWED_HOSTS = ['13.201.229.169', '127.0.0.1','justcode.co.in','https://justcode.co.in','0.0.0.0','localhost:8000',]
 
 
 # Application definition
@@ -78,6 +78,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'todo.wsgi.application'
+
+
 
 
 # Database
@@ -193,3 +195,4 @@ REST_FRAMEWORK = {
 #        }
 #    },
 #}
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
