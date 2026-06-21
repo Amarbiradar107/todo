@@ -1,38 +1,23 @@
-version: '3.9'
 
 services:
   app:
     build: .
-    image: app:todo_app
-
-    command: >
-      gunicorn todo.wsgi:application
-      --bind 0.0.0.0:8000
-      --timeout 60
-      --workers 3
-
     ports:
       - "8000:8000"
-
     volumes:
       - .:/todo_app
-
+    image: app:todo_app
+    command: gunicorn todo.wsgi:application --bind 0.0.0.0:8000 --timeout=5 --threads=10
     restart: unless-stopped
 
   nginx:
-    image: nginx:latest
-    build:
-      context: .
-      dockerfile: todo/nginx/Dockerfile
-
+    build: todo/nginx
     ports:
       - "80:80"
       - "443:443"
-
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
-
-    depends_on:
+    image: nginx:latest
+    links:
       - app
-
     restart: unless-stopped
