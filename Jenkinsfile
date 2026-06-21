@@ -9,11 +9,20 @@ pipeline {
             }
         }
 
+        stage('Build') {
+            steps {
+                dir('todo') {
+                    sh 'docker compose build'
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
                 dir('todo') {
                     sh '''
-                        docker compose up -d --build
+                        docker compose down
+                        docker compose up -d
                     '''
                 }
             }
