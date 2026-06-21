@@ -7,7 +7,6 @@ services:
     volumes:
       - .:/todo_app
     image: app:todo_app
-    container_name: todo_app_container
     command: gunicorn todo.wsgi:application --bind 0.0.0.0:8000 --timeout=5 --threads=10
     restart: always
 
