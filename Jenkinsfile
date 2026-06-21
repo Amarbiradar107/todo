@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        COMPOSE_PROJECT_NAME = "todo"
+    }
+
     stages {
 
         stage('Checkout') {
@@ -9,13 +13,17 @@ pipeline {
             }
         }
 
-        stage('cleanup') {
-
+        stage('Cleanup') {
             steps {
-            dir('todo') {
-                    sh 'docker ps -a'
-                    sh 'docker compose down'
-                    sh 'docker container prune -f'
+                dir('todo') {
+                    sh '''
+                        docker compose -p ${COMPOSE_PROJECT_NAME} down --remove-orphans || true
+
+                        docker stop todo-nginx-1 || true
+                        docker rm -f todo-nginx-1 || true
+
+                        docker image prune -f
+                    '''
                 }
             }
         }
@@ -23,7 +31,9 @@ pipeline {
         stage('Build') {
             steps {
                 dir('todo') {
-                    sh 'docker compose build'
+                    sh '''
+                        docker compose -p ${COMPOSE_PROJECT_NAME} build
+                    '''
                 }
             }
         }
@@ -32,10 +42,17 @@ pipeline {
             steps {
                 dir('todo') {
                     sh '''
-                        docker compose down
-                        docker compose up -d
+                        docker compose -p ${COMPOSE_PROJECT_NAME} up -d
                     '''
                 }
+            }
+        }
+
+        stage('Health Check') {
+            steps {
+                sh '''
+                    docker ps
+                '''
             }
         }
     }
