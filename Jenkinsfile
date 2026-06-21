@@ -9,6 +9,17 @@ pipeline {
             }
         }
 
+        stage('cleanup') {
+
+            steps {}
+                dir('todo') {
+                    sh 'docker ps -a'
+                    sh 'docker compose down'
+                    sh 'docker container prune -f'
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 dir('todo') {
