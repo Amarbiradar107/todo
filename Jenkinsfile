@@ -11,22 +11,20 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker compose build --no-cache'
+                dir('todo') {
+                    sh 'docker compose build'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                sh '''
-                docker compose down
-                docker compose up -d
-                '''
-            }
-        }
-
-        stage('Verify') {
-            steps {
-                sh 'docker ps'
+                dir('todo') {
+                    sh '''
+                        docker compose down
+                        docker compose up -d
+                    '''
+                }
             }
         }
     }
