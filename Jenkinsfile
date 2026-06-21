@@ -8,23 +8,22 @@ pipeline {
                 checkout scm
             }
         }
-
-        stage('Build') {
-            steps {
-                dir('todo') {
-                    sh 'docker compose build'
-                }
+        stage('Build Image') {
+        steps {
+                sh 'docker build -t todo-app:${BUILD_NUMBER} .'
             }
         }
-
         stage('Deploy') {
             steps {
-                dir('todo') {
-                    sh '''
-                        docker compose down
-                        docker compose up -d
-                    '''
-                }
+                sh '''
+                    docker stop todo_app_container || true
+                    docker rm todo_app_container || true
+
+                    docker run -d \
+                      --name todo_app_container \
+                      -p 8000:8000 \
+                      todo-app:${BUILD_NUMBER}
+                '''
             }
         }
     }
