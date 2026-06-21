@@ -3,23 +3,30 @@ pipeline {
 
     stages {
 
-        stage('Pull Latest Code') {
+        stage('Checkout') {
             steps {
-                echo 'Checking out code...'
                 checkout scm
             }
         }
 
-        stage('Build Containers') {
+        stage('Build') {
             steps {
-                sh 'docker-compose build'
+                sh 'docker compose build --no-cache'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'docker-compose down'
-                sh 'docker-compose up -d'
+                sh '''
+                docker compose down
+                docker compose up -d
+                '''
+            }
+        }
+
+        stage('Verify') {
+            steps {
+                sh 'docker ps'
             }
         }
     }

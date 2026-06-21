@@ -1,12 +1,12 @@
-FROM python:3.15.0b2-bookworm
+FROM python:3.12-slim
 
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /todo_app/todo
 
-COPY reqirement.txt reqirement.txt
+COPY requirements.txt requirements.txt
 
-RUN pip install -r reqirement.txt
+RUN pip install -r requirements.txt
 
 COPY . .
 
