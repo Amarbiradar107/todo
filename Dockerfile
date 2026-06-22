@@ -1,16 +1,18 @@
-FROM python:3.15.0b2-bookworm
-LABEL authors="amar biradar"
+FROM python:3.12-slim
 
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /todo_app/todo
+WORKDIR /app
 
-COPY reqirement.txt reqirement.txt
+COPY requirements.txt .
 
-RUN pip install -r reqirement.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD gunicorn todo.wsgi:application --bind 0.0.0.0:8000
+WORKDIR /app/todo
 
 EXPOSE 8000
+
+
+CMD ["gunicorn", "todo.wsgi:application", "--bind", "0.0.0.0:8000"]
