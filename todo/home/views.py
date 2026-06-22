@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -7,4 +7,5 @@ from rest_framework.views import APIView
 
 class home(APIView):
     def get(self,request):
-        return Response({'message':'Welcome to the To-Do List API!'})
+
+        return redirect('https://amar-protfolio-2026-june-06.s3.ap-south-1.amazonaws.com/protfolio/protfolio/index.html')

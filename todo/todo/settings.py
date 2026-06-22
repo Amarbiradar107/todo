@@ -29,7 +29,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['13.201.180.166', '127.0.0.1','justcode.co.in','https://justcode.co.in','0.0.0.0','localhost:8000','*']
 
-CSRF_TRUSTED_ORIGINS = ['https://justcode.co.in','justcode.co.in','13.201.229.169']
+CSRF_TRUSTED_ORIGINS = ['https://justcode.co.in','https://justcode.co.in','https://13.201.229.169']
 
 # Application definition
 
@@ -197,6 +197,3 @@ REST_FRAMEWORK = {
 #    },
 #}
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
