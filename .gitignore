@@ -5,4 +5,4 @@ __pycache__
 *.pyo
 *.pyd
 .idea/TODO.iml
-.env
+./.env
