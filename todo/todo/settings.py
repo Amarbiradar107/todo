@@ -11,23 +11,24 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv,dotenv_values
 
 from django.conf.global_settings import STATIC_ROOT, SECURE_SSL_HOST, SECURE_PROXY_SSL_HEADER
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o4mik1j1hmtwl^c5#c5^+5zh#7*s0_5k+0@$-^$)jyrs52z73b'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['13.201.180.166', '127.0.0.1','justcode.co.in','https://justcode.co.in','0.0.0.0','localhost:8000','*']
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 CSRF_TRUSTED_ORIGINS = ['https://justcode.co.in','https://justcode.co.in','https://13.201.229.169']
 
